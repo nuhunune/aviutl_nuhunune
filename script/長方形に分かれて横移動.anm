@@ -1,0 +1,20 @@
+@長方形に分かれて横移動
+--track0:分割数,1,500,5
+--track1:始める時間,0,1000,2
+--track2:かける時間,0.5,20,2
+--track3:移動距離,-2000,2000,500
+n=obj.track0
+w=obj.w
+h=obj.h
+for i=1,n do
+  if(obj.time<obj.track1+obj.track2/2/n*i) then
+    obj.drawpoly(0,h/n*(i-1),0,w,h/n*(i-1),0,w,h/n*i,0,0,h/n*i,0,0,h/n*(i-1),w,h/n*(i-1),w,h/n*i,0,h/n*i)
+
+  elseif(obj.time>obj.track1+obj.track2/2/n*i+obj.track2/2*(n-1)/n) then
+    obj.drawpoly(obj.track3,h/n*(i-1),0,w+obj.track3,h/n*(i-1),0,w+obj.track3,h/n*i,0,obj.track3,h/n*i,0,0,h/n*(i-1),w,h/n*(i-1),w,h/n*i,0,h/n*i)
+
+  else
+    add=obj.track3/2*(1-math.cos(math.pi*2*(obj.time-obj.track1-obj.track2/2/n*(i-1))/obj.track2))
+    obj.drawpoly(add,h/n*(i-1),0,w+add,h/n*(i-1),0,w+add,h/n*i,0,add,h/n*i,0,0,h/n*(i-1),w,h/n*(i-1),w,h/n*i,0,h/n*i)
+  end
+end
